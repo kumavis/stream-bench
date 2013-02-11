@@ -1,0 +1,23 @@
+{
+  "name": "stream-bench",
+  "version": "0.0.1",
+  "description": "Node streams benchmarks (throughput, etc)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo TODO"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:danmilon/streams-benchmark.git"
+  },
+  "keywords": [
+    "streams",
+    "benchmark",
+    "throughput"
+  ],
+  "dependencies": {
+    "readable-stream": "0.2.0"
+  },
+  "author": "Dan Milon <danmilon@gmail.com>",
+  "license": "MIT"
+}
