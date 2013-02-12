@@ -1,6 +1,6 @@
 {
   "name": "stream-bench",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Node streams benchmarking (throughput, etc)",
   "main": "index.js",
   "scripts": {
