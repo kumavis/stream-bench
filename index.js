@@ -74,7 +74,16 @@ StreamBench.prototype.emitStats = function () {
 StreamBench.prototype.report = function () {
   var rates = this.data.rates
 
-  rates.sort()
+  rates.sort(function (a, b) {
+    if (a > b) {
+      return 1
+    }
+    else if (a === b) {
+      return 0
+    }
+
+    return -1
+  })
 
   var min    = rates[0]
     , max    = rates[rates.length - 1]
