@@ -19,14 +19,15 @@ function StreamBench(opts) {
 
   // since we're extending another class we better wrap our stuff
   this.data = {
-    start:    null,
-    received: 0,
-    rates:    [],
-    interval: setInterval(this.emitStats.bind(this), opts.interval || 1000),
-    rate:     opts.rate || 'mbits'
+    start:     null,
+    received:  0,
+    rates:     [],
+    interval:  setInterval(this.emitStats.bind(this), opts.interval || 1000),
+    metric:    opts.metric || 'mbits',
+    logReport: opts.logReport || false
   }
 
-  if (!bitsConverters[this.data.rate]) {
+  if (!bitsConverters[this.data.metric]) {
     throw new Error('unknown rate ' + this.rate)
   }
 
@@ -60,7 +61,7 @@ StreamBench.prototype.emitStats = function () {
 
   elapsed = elapsed[0] * 1E9 + elapsed[1]
 
-  var converted = bitsConverters[this.data.rate](this.data.received * 8)
+  var converted = bitsConverters[this.data.metric](this.data.received * 8)
     , rate      = converted / elapsed * 1E9
 
   this.data.rates.push(rate)
@@ -86,12 +87,23 @@ StreamBench.prototype.report = function () {
 
   avg /= rates.length
 
-  this.emit('report', {
+  var report = {
     min:    min,
     avg:    avg,
     max:    max,
     median: median
-  })
+  }
+
+  this.emit('report', report)
+
+  if (this.data.logReport) {
+    var metric = this.data.metric
+
+    console.log('min: %s %s/s', report.min.toFixed(2), metric)
+    console.log('avg: %s %s/s', report.avg.toFixed(2), metric)
+    console.log('max: %s %s/s', report.max.toFixed(2), metric)
+    console.log('median: %s %s/s', report.median.toFixed(2), metric)
+  }
 }
 
 var bitsConverters = {

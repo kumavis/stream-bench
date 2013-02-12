@@ -13,7 +13,7 @@ http.get('http://nodejs.org/dist/latest/node-v0.8.19.tar.gz', function (res) {
 
   var bench = streamBench({
     interval: 100,
-    rate:     'mbytes'
+    metric:   'mbytes'
   })
 
   bench.on('rate', function (rate) {
