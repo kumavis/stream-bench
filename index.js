@@ -24,7 +24,8 @@ function StreamBench(opts) {
     rates:     [],
     interval:  setInterval(this.emitStats.bind(this), opts.interval || 1000),
     metric:    opts.metric || 'mbits',
-    logReport: opts.logReport || false
+    logReport: opts.logReport || false,
+    dump:      opts.dump || false
   }
 
   if (!bitsConverters[this.data.metric]) {
@@ -49,7 +50,7 @@ StreamBench.prototype._transform = function (chunk, outFn, cb) {
 
   this.data.received += chunk.length
 
-  cb(null, chunk)
+  this.data.dump ? cb(null, '') : cb(null, chunk)
 }
 
 StreamBench.prototype.emitStats = function () {
