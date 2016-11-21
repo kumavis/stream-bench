@@ -16,7 +16,7 @@
     "throughput"
   ],
   "dependencies": {
-    "readable-stream": "0.2.0"
+    "readable-stream": "2.2.2"
   },
   "author": "Dan Milon <danmilon@gmail.com>",
   "license": "MIT"
